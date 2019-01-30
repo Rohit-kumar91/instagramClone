@@ -31,11 +31,11 @@ extension UIView {
            self.rightAnchor.constraint(equalTo: right, constant: -paddingRight).isActive = true
         }
         
-        if width != width {
+        if width != 0 {
             widthAnchor.constraint(equalToConstant: width).isActive = true
         }
         
-        if height != height {
+        if height != 0 {
             heightAnchor.constraint(equalToConstant: height).isActive = true
         }
     }
