@@ -25,6 +25,7 @@ class LoginViewController: UIViewController {
         return view
     }()
     
+    
     let emailTextfield: UITextField = {
         let tf = UITextField()
         tf.placeholder = "Email"
@@ -34,14 +35,19 @@ class LoginViewController: UIViewController {
         return tf
     }()
     
+    
+    
     let passwordTextfield: UITextField = {
         let tf = UITextField()
         tf.placeholder = "Password"
         tf.backgroundColor = UIColor(white: 0, alpha: 0.03)
         tf.borderStyle = .roundedRect
         tf.font = UIFont.systemFont(ofSize: 14)
+        tf.isSecureTextEntry = true
         return tf
     }()
+    
+    
     
     let loginButton: UIButton = {
         let button = UIButton()
@@ -52,6 +58,20 @@ class LoginViewController: UIViewController {
         return button
         
     }()
+    
+    
+    
+    let dontHaveAccountButton: UIButton = {
+        let button = UIButton()
+        let attributedTitle = NSMutableAttributedString(string: "Don't have a account?   ", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+        
+        attributedTitle.append(NSAttributedString(string: "Sign Up", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor(red: 17/255, green: 154/255, blue: 237/255, alpha: 1)]))
+        
+        button.setAttributedTitle(attributedTitle, for: .normal)
+        button.addTarget(self, action: #selector(handleShowSignUp), for: .touchUpInside)
+        
+        return button
+    }()
 
     
     override func viewDidLoad() {
@@ -59,16 +79,21 @@ class LoginViewController: UIViewController {
 
         view.backgroundColor = .white
         
+        //Hide navigation Comtroller
+        navigationController?.navigationBar.isHidden = true
+        
         view.addSubview(containerView)
         containerView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 150)
+        
         configureViewComponents()
+        
+        view.addSubview(dontHaveAccountButton)
+        dontHaveAccountButton.anchor(top: nil, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 20, paddingRight: 0, width: 0, height: 50)
         
     }
     
     
     func configureViewComponents() {
-        
-       
         
         let stackView = UIStackView(arrangedSubviews: [emailTextfield,passwordTextfield,loginButton])
         stackView.distribution = .fillEqually
@@ -78,9 +103,10 @@ class LoginViewController: UIViewController {
         stackView.anchor(top: containerView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 40, paddingLeft: 20, paddingBottom: 0, paddingRight: 20, width: 0, height: 140)
         
     }
-
     
-    
-    
-
+    @objc func handleShowSignUp() {
+        print("Handle Show signUp.")
+        let signUpVC = SignUpViewController()
+        self.navigationController?.pushViewController(signUpVC, animated: true)
+    }
 }
