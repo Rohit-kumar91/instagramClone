@@ -127,8 +127,10 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
         
         guard let email = emailTextfield.text else { return }
         guard let password = passwordTextfield.text else { return }
+        guard let fullname = fullnameTextfield.text else { return }
+        guard let username = usernameTextfield.text?.lowercased() else { return }
         
-        Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
+        Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
             
             //Handle error
             if let error = error {
@@ -138,6 +140,51 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
             
             //Success
             print("Successfully created user with firebase.")
+            
+            guard let profileImage = self.plusPhotoButton.imageView?.image else { return }
+            guard let uploadData = profileImage.jpegData(compressionQuality: 0.3) else { return }
+            let filename = NSUUID().uuidString
+            
+            let storageRef = Storage.storage().reference().child("profile_images").child(filename)
+            storageRef.putData(uploadData, metadata: nil, completion: { (metadata, error) in
+                
+                print("instorage Refff")
+                //Handling error
+                if let error = error {
+                    print("Failed to upload image to firebase storage with error", error.localizedDescription)
+                    return
+                }
+                
+                
+                storageRef.downloadURL(completion: { (downloadURL, error) in
+                    
+                    //ProfileImage URL
+                    guard let profileImageUrl = downloadURL?.absoluteString else {
+                        print("DEBUG: Profile imageURl is nil")
+                        return
+                    }
+                    
+                    
+                    guard let uid = authResult?.user.uid else { return }
+                    
+                    let dictionaryValues = ["name": fullname,
+                                            "username": username,
+                                            "profileImageUrl": profileImageUrl]
+                    
+                    
+                    let values = [uid : dictionaryValues]
+                    
+                    //save userInfo to database
+                    Database.database().reference().child("users").updateChildValues(values, withCompletionBlock: { (error, ref) in
+                        print("Successfully create user and saved information to database")
+                    
+                        guard let mainTabVC = UIApplication.shared.keyWindow?.rootViewController as? MainTabController else { return }
+                        mainTabVC.confirgureViewController()
+                        self.dismiss(animated: true, completion: nil)
+                    
+                    })
+                })
+            })
         }
         
         
@@ -185,8 +232,7 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
         plusPhotoButton.setImage(profileImage.withRenderingMode(.alwaysOriginal), for: .normal)
         
         self.dismiss(animated: true, completion: nil)
-        
-        
+    
         
     }
     
