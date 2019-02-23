@@ -26,6 +26,8 @@
 		B7EEB0FE2201D3F30082A65E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7EEB0FC2201D3F30082A65E /* LaunchScreen.storyboard */; };
 		B7EEB1092201D6250082A65E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7EEB1082201D6250082A65E /* LoginViewController.swift */; };
 		B7EEB10C2201DA6A0082A65E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7EEB10B2201DA6A0082A65E /* Extensions.swift */; };
+		B7EF50F9222181B20071AB93 /* Follow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7EF50F8222181B20071AB93 /* Follow.swift */; };
+		B7EF50FB222182830071AB93 /* FollowCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7EF50FA222182830071AB93 /* FollowCellTableViewCell.swift */; };
 		B7F01647220979FA002E3680 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F01646220979FA002E3680 /* User.swift */; };
 		B7F016492209A400002E3680 /* SearchTableviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F016482209A400002E3680 /* SearchTableviewCell.swift */; };
 /* End PBXBuildFile section */
@@ -54,6 +56,8 @@
 		B7EEB0FF2201D3F30082A65E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B7EEB1082201D6250082A65E /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		B7EEB10B2201DA6A0082A65E /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		B7EF50F8222181B20071AB93 /* Follow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Follow.swift; sourceTree = "<group>"; };
+		B7EF50FA222182830071AB93 /* FollowCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowCellTableViewCell.swift; sourceTree = "<group>"; };
 		B7F01646220979FA002E3680 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		B7F016482209A400002E3680 /* SearchTableviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableviewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -132,6 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				B74D871E2206A92800518533 /* UserProfileVC.swift */,
+				B7EF50F8222181B20071AB93 /* Follow.swift */,
 			);
 			path = UserProfile;
 			sourceTree = "<group>";
@@ -185,6 +190,7 @@
 			children = (
 				B7EB3B5922072E8C00C5ED62 /* UserProfileHeader.swift */,
 				B7F016482209A400002E3680 /* SearchTableviewCell.swift */,
+				B7EF50FA222182830071AB93 /* FollowCellTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -351,12 +357,14 @@
 				B74D87172206A8BC00518533 /* FeedVC.swift in Sources */,
 				B7A557F3220C6D1E00E06588 /* Constants.swift in Sources */,
 				B7EB3B5A22072E8C00C5ED62 /* UserProfileHeader.swift in Sources */,
+				B7EF50F9222181B20071AB93 /* Follow.swift in Sources */,
 				B74D871F2206A92800518533 /* UserProfileVC.swift in Sources */,
 				B7EEB0F92201D3EF0082A65E /* InstagramClone.xcdatamodeld in Sources */,
 				B74D871522069E2000518533 /* MainTabController.swift in Sources */,
 				B74D871D2206A90800518533 /* NotificationVCTableViewController.swift in Sources */,
 				B7EEB0F12201D3EF0082A65E /* AppDelegate.swift in Sources */,
 				B7EEB10C2201DA6A0082A65E /* Extensions.swift in Sources */,
+				B7EF50FB222182830071AB93 /* FollowCellTableViewCell.swift in Sources */,
 				B7E91EA12202BF0C0059B4DB /* SignUpViewController.swift in Sources */,
 				B74D871B2206A8EF00518533 /* UploadVCViewController.swift in Sources */,
 				B7578D8922120707008CACC8 /* Protocols.swift in Sources */,

@@ -1,33 +1,16 @@
 //
-//  SearchTableviewCell.swift
+//  FollowCellTableViewCell.swift
 //  InstagramClone
 //
-//  Created by Rohit Prajapati on 05/02/19.
+//  Created by Rohit Prajapati on 23/02/19.
 //  Copyright © 2019 Rohit Prajapati. All rights reserved.
 //
 
 import UIKit
 
-class SearchTableviewCell: UITableViewCell {
-
-    //MARK: Properties.
+class FollowCellTableViewCell: UITableViewCell {
     
-    var user: User? {
-        didSet {
-            
-            guard let profileImageUrl = user?.profileImageUrl else { return }
-            guard let username = user?.username else { return }
-            guard let fullname = user?.name else { return }
-            
-            profileImageView.loadImage(with: profileImageUrl)
-            self.textLabel?.text = username
-            self.detailTextLabel?.text = fullname
-            
-            
-        }
-    }
-    
-    
+    //MARK: Properties
     
     let profileImageView: UIImageView = {
         let iv = UIImageView()
@@ -37,22 +20,43 @@ class SearchTableviewCell: UITableViewCell {
         return iv
     }()
     
+    
+    lazy var followButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Loading", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = UIColor(red: 17/255, green: 154/255, blue: 237/255, alpha: 1)
+        button.addTarget(self, action: #selector(handleFollowTapped), for: .touchUpInside)
+        return button
+    }()
+    
+    //MARK: Handle Follow Button
+    @objc func handleFollowTapped() {
+        print("Handle follow tapped")
+    }
+
+    //MARK: init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
         
         //add profile Image view
         addSubview(profileImageView)
         profileImageView.anchor(top: nil, left: leftAnchor, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 8, paddingBottom: 0, paddingRight: 0, width: 48, height: 48)
-        
         profileImageView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
         profileImageView.layer.cornerRadius = 48/2
         
+        //add follow button
+        addSubview(followButton)
+        followButton.anchor(top: nil, left: nil, bottom: nil, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 12, width: 90, height: 30)
+        followButton.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        followButton.layer.cornerRadius = 3
         
-        self.textLabel?.text = "Username"
-        self.detailTextLabel?.text = "Fullname "
         
     }
     
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func layoutSubviews() {
         
@@ -66,10 +70,5 @@ class SearchTableviewCell: UITableViewCell {
         detailTextLabel?.font = UIFont.systemFont(ofSize: 12)
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
-    
-
 }

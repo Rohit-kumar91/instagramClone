@@ -14,6 +14,7 @@ class UserProfileHeader: UICollectionViewCell {
     
     // MARK: Properties
     var delegate: UserProfileHeaderDelegate?
+    
     var user: User? {
         didSet {
             //Configure edit profile button
@@ -58,18 +59,38 @@ class UserProfileHeader: UICollectionViewCell {
     }()
     
     
-    let followersLabel: UILabel = {
+    lazy var followersLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
         label.textAlignment = .center
+        
+        let attributedText = NSMutableAttributedString(string: "0\n", attributes: [NSMutableAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
+        attributedText.append(NSAttributedString(string: "followers", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.lightGray]))
+        label.attributedText = attributedText
+        
+        //Add gesture recognizer.
+        let followerTap = UITapGestureRecognizer(target: self, action: #selector(handleFollowersTapped))
+        followerTap.numberOfTapsRequired = 1
+        label.isUserInteractionEnabled = true
+        label.addGestureRecognizer(followerTap)
         return label
     }()
     
     
-    let followingLabel: UILabel = {
+    lazy var followingLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
         label.textAlignment = .center
+        
+        let attributedText = NSMutableAttributedString(string: "0\n", attributes: [NSMutableAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
+        attributedText.append(NSAttributedString(string: "following", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.lightGray]))
+        label.attributedText = attributedText
+        
+        //Add gesture recognizer.
+        let followingTap = UITapGestureRecognizer(target: self, action: #selector(handleFollowingTapped))
+        followingTap.numberOfTapsRequired = 1
+        label.isUserInteractionEnabled = true
+        label.addGestureRecognizer(followingTap)
         return label
     }()
     
@@ -113,6 +134,15 @@ class UserProfileHeader: UICollectionViewCell {
     
     
     // MARK: Handler
+    
+    @objc func handleFollowersTapped() {
+        delegate?.handleFollowersTapped(for: self)
+    }
+    
+    @objc func handleFollowingTapped() {
+        delegate?.handleFollowingTapped(for: self)
+    }
+    
     
     func configureUserStats() {
         

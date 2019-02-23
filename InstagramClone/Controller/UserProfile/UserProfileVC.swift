@@ -134,6 +134,7 @@ class UserProfileVC: UICollectionViewController, UICollectionViewDelegateFlowLay
         }
     }
     
+    
     func setUserStats(for header: UserProfileHeader) {
         
         guard let user = header.user else { return }
@@ -166,6 +167,22 @@ class UserProfileVC: UICollectionViewController, UICollectionViewDelegateFlowLay
             attributedText.append(NSAttributedString(string: "following", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.lightGray]))
             header.followingLabel.attributedText = attributedText
         }
+    }
+    
+    
+    func handleFollowersTapped(for header: UserProfileHeader) {
+        print("Handle follower tapped")
+        let followVC = FollowVC()
+        followVC.viewFollowers = true
+        navigationController?.pushViewController(followVC, animated: true)
+    }
+    
+    func handleFollowingTapped(for header: UserProfileHeader) {
+        print("Handle following tapped")
+        let followVC = FollowVC()
+        followVC.viewFollowing = true
+        navigationController?.pushViewController(followVC, animated: true)
+        
     }
     
     
